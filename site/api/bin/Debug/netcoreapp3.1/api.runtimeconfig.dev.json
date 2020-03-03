@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/gardel/.dotnet/store/|arch|/|tfm|",
+      "/home/gardel/.nuget/packages"
+    ]
+  }
+}
