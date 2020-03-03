@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/cbda90b9-0094-4574-b7f0-c08ba1867a72/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/gardelsouza",
+    "appService.deploySubpath": ""
+}
