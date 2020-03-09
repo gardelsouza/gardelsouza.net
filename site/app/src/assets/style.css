@@ -1,0 +1,118 @@
+div, header, nav, a, aside, article, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+audio, blockquote, details, footer, h1, h2, h3, ol, p, ul {
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, p>img, section, li {
+    display: block;
+}
+
+header {
+    display: block;
+    text-align: right;
+    font-size: 105%;
+}
+
+a {
+    color: #A2E204;
+    text-decoration: unset;
+    cursor: pointer;
+    outline: 0;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+summary>a {
+    pointer-events: none;
+    color: inherit;
+    text-decoration: inherit;
+}
+
+div#container {
+    background-color: #222;
+    max-width: 900px;
+    margin: 1em auto;
+    padding: 1em 1.5em;
+}
+
+aside {
+    float: right;
+}
+
+
+h1 {
+    padding-bottom: .5em;
+    border-bottom: 2px dashed #54B3C5;
+}
+
+h1, h2, h3 {
+    font-weight: 900;
+    font-size: 105%;
+    color: #54B3C5;
+    margin: 1em 0 .5em;
+}
+
+h1:before {
+    content: '# ';
+}
+
+h2:before {
+    content: '## '
+}
+
+h3:before {
+    content: '### '
+}
+
+ul {
+    list-style: none;
+    margin: 1em 0 .5em;
+}
+
+ul>li {
+    margin-left: 1em;
+}
+
+ul>li:before {
+    color: #fa1d6f;
+    content: '- ';
+    margin-left: -1em;
+    float: left;
+}
+
+footer {
+    color: #9c998e;
+}
+
+footer {
+    border-top: 2px dashed #9c998e;
+    margin: 1.5em 0 0;
+}
+
+body, html {
+    background-color: #282828;
+    color: #F8f8f2;
+    font-family: monospace;
+    line-height: 130%;
+    font-size: 105%;
+
+}
+
+img#profile {
+    width: 120px;
+    border-radius: 50%;
+    border: 2px solid #A2E204;
+    margin-top: 3em;
+}
