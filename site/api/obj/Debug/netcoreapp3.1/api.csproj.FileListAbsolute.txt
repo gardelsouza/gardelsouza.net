@@ -16,3 +16,5 @@
 /home/gardel/Projects/gardelsouza.net/site/api/obj/Debug/netcoreapp3.1/staticwebassets/api.StaticWebAssets.xml
 /home/gardel/Projects/gardelsouza.net/site/api/obj/Debug/netcoreapp3.1/api.dll
 /home/gardel/Projects/gardelsouza.net/site/api/obj/Debug/netcoreapp3.1/api.pdb
+/home/gardel/Projects/gardelsouza.net/site/api/bin/Debug/netcoreapp3.1/LiteDB.dll
+/home/gardel/Projects/gardelsouza.net/site/api/obj/Debug/netcoreapp3.1/api.csproj.CopyComplete

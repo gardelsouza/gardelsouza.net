@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using api.Models;
+using api.Services;
 
 namespace api.Controllers
 {
@@ -11,29 +13,59 @@ namespace api.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IWeatherForecastService _forecastDbService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastService forecastDbService)
         {
+            _forecastDbService = forecastDbService;
             _logger = logger;
         }
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return _forecastDbService.FindAll();
+        }
+
+        [HttpGet("{id}", Name = "FindOne")]
+        public ActionResult<WeatherForecast> Get(int id)
+        {
+            var result = _forecastDbService.FindOne(id);
+            if (result != default)
+                return Ok(result);
+            else
+                return NotFound();
+        }
+
+        [HttpPost]
+        public ActionResult<WeatherForecast> Insert(WeatherForecast dto)
+        {
+            var id = _forecastDbService.Insert(dto);
+            if (id != default)
+                return CreatedAtRoute("FindOne", new { id = id }, dto);
+            else
+                return BadRequest();
+        }
+
+        [HttpPut]
+        public ActionResult<WeatherForecast> Update(WeatherForecast dto)
+        {
+            var result = _forecastDbService.Update(dto);
+            if (result)
+                return NoContent();
+            else
+                return NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<WeatherForecast> Delete(int id)
+        {
+            var result = _forecastDbService.Delete(id);
+            if (result > 0)
+                return NoContent();
+            else
+                return NotFound();
         }
     }
 }
