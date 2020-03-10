@@ -31,6 +31,7 @@ namespace api.Controllers
         [HttpGet("{id}", Name = "FindOne")]
         public ActionResult<WeatherForecast> Get(int id)
         {
+            
             var result = _forecastDbService.FindOne(id);
             if (result != default)
                 return Ok(result);
