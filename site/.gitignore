@@ -1,0 +1,4 @@
+.vscode/
+api/obj/
+api/bin/
+api/database*
