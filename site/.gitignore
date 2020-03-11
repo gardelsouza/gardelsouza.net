@@ -3,6 +3,8 @@
 api/obj/
 api/bin/
 api/database*
+api.Test/bin/
+api.Test/obj/
 
 # Ignores do APP
 *~
