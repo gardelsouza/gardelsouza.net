@@ -27,6 +27,7 @@ namespace api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IWeatherForecastService, WeatherForecastService>();
+            services.AddScoped<IMessageService, MessageService>();
             services.Configure<Database.LiteDbOptions>(Configuration.GetSection("LiteDbOptions"));
             services.AddSingleton<Database.ILiteDbContext, Database.LiteDbContext>();
             services.AddControllers();
