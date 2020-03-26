@@ -73,8 +73,7 @@ namespace api.Test
 
             //Assert - O resultado esperado
             Assert.IsAssignableFrom<IEnumerable<Message>>(result);
-            Assert.True(result.Count() >= 0);
-            Assert.True(result.Count() > 1 && result.Count() <= 5);
+            Assert.True(result.Count() >= 0, $"Total de itens na lista { result.Count() }");
             Assert.All<Message>(result, x => Assert.False(x.Viewed));
         }
 
@@ -82,11 +81,51 @@ namespace api.Test
         public void AtualizarSomenteAsUltimasMensagensQueNaoForamVistas()
         {
             //Arrange
+            var messages = _service.FindPendingReading(new Infra.PageParameters());
+            var last = messages.Last();
 
             //Act
-            //var result = _controller.UpdateViewedMessages();
+            var result = _service.UpdateViewed(last);
+            var pending = _service.FindPendingReading(new Infra.PageParameters());
 
             //Assert
+            Assert.IsType<int>(result);
+            Assert.All<Message>(pending, x => Assert.True(x.Id > last.Id, $"Valor da lista { x.Id } valor do ultimo { last.Id }"));
+
+        }
+    
+        [Fact]
+        public void VerificarSeAsMensagensEstaoSendoAlteradas()
+        {
+            // Arrange
+            var messages = _service.FindAll(new Infra.PageParameters());
+            var message = messages.ElementAt(new Random().Next(messages.Count()));
+            var text = message.Text;
+            message.Text = $"Mensagem atualizada em { DateTime.Now }";
+
+            // Act
+            bool result = _service.Update(message);
+            var messageAfterUpdate = _service.FindOne(message.Id);
+
+            // Assert
+            Assert.True(result, "Registro atualizado");
+            Assert.True(messageAfterUpdate.Text != text, $"Mensagem anterior: '{ text }', mensagem atualizada: '{ messageAfterUpdate.Text }'");
+        }
+    
+        [Fact]
+        public void VerificarSeAsMensagensEstaoSendoExcluidas()
+        {
+            // Arrange
+            var messages = _service.FindAll(new Infra.PageParameters());
+            var message = messages.ElementAt(new Random().Next(messages.Count()));
+
+            //Act
+            var result = _service.Delete(message.Id);
+            var messagesAfterDelete =  _service.FindAll(new Infra.PageParameters());
+
+            //Assert
+            Assert.True(result > 0, $"O registro de Id: '{ message.Id }' foi excluido");
+            Assert.All<Message>(messagesAfterDelete, x => Assert.False(x.Id == message.Id, $"Lista: '{ x.Id }' mensagem: '{ message.Id }'"));
         }
     }
 }

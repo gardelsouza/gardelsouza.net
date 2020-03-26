@@ -57,7 +57,7 @@ namespace api.Services
         public int UpdateViewed(Message lastViewedMessage)
         {
             return _liteDb.GetCollection<Message>("Messages")
-                .UpdateMany("$.Viewed = false", $"$.Id < {lastViewedMessage.Id}");
+                .UpdateMany("{ Viewed: true }", $"$.Id <= {lastViewedMessage.Id}");
         }
 
         public int Delete(int id)
