@@ -19,6 +19,7 @@ import { BlogComponent } from './blog/blog.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'blog', component: BlogComponent },
+      { path: '**', component: HomeComponent }
     ]),
   ],
   providers: [],
