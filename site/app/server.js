@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const sgMail = require('@sendgrid/mail');
 
 const app = express();
@@ -13,12 +14,14 @@ app.use(express.static(__dirname + '/dist/app'));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+// Enable cors
+app.use(cors());
+
 // Set API key to sendgrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Routes
 app.post('/sendMail', function (req, res) {
-
     if (!req.body.text) {
         return res.status(400).send({
             success: 'false',
@@ -34,25 +37,19 @@ app.post('/sendMail', function (req, res) {
         html: req.body.text,
     };
 
-    (async () => {
-        try {
-            await sgMail.send(msg);
-        } catch (error) {
-            console.error(error.response.body)
-
-            if (error.response) {
-                return res.status(400).send({
-                    success: 'false',
-                    message: error.response.body
-                });
-            }
-        }
-    })();
-
-    return res.status(201).send({
-        success: 'true',
-        message: 'Email sent'
-    });
+    sgMail.send(msg).then(
+        reason => {
+            return res.status(201).send({
+                success: 'true',
+                message: 'Email sent'
+            });
+        },
+        error => {
+            return res.status(401).send({
+                success: 'false',
+                message: error.response.body
+            });
+        });
 });
 
 app.get('/*', function (req, res) {

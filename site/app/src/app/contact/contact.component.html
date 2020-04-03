@@ -1,0 +1,6 @@
+<form #f="ngForm" (ngSubmit)="onSubmitTemplateBased()">
+    <div class="field">
+        <textarea class="textarea" name="message" placeholder="O que você tem em mente? Identifique-se deixe seu e-mail e diga o que quiser." [(ngModel)]="text" required></textarea>
+    </div>
+    <button type="submit" class="button is-danger is-large" [disabled]="!f.valid">Enviar</button>
+</form>
