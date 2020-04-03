@@ -4,3 +4,12 @@ content-type: application/json
 {
     "text": "Opa"
 }
+
+###
+
+POST http://www.gardelsouza.net/sendMail HTTP/1.1
+content-type: application/json
+
+{
+    "text": "Olar"
+}
