@@ -6,7 +6,7 @@ import { map, catchError } from 'rxjs/operators'
 @Injectable()
 export class ContactService {
 
-    apiUrl: string = 'http://localhost';
+    apiUrl: string = '';
 
     constructor(private httpClient: HttpClient) { }
 
