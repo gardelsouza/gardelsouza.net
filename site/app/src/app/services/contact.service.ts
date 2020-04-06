@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators'
 
 @Injectable()
 export class ContactService {
@@ -9,15 +10,15 @@ export class ContactService {
 
     constructor(private httpClient: HttpClient) { }
 
-    public sendMail(text): any {
+    public sendMail(text): Observable<any> {
         var API_URL = `${this.apiUrl}/sendMail`;
 
-        this.httpClient.post(API_URL, { "text": text }).subscribe(
-            res => {
-                return res;
-            }, err => {
-                return err;
-            }
+        return this.httpClient.post(API_URL, { "text": text }).pipe(
+            map(res => { 
+                return res 
+            }), catchError(err => {
+                return throwError('Erro ao enviar mensagem.');
+            })
         );
     }
 }
