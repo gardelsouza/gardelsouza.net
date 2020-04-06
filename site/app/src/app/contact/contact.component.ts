@@ -16,10 +16,13 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmitTemplateBased() {
-    var ret = this.contactService.sendMail(this.text);
-    if(ret.message == "Email sent") {
-      this.text = "";
-    }
+    this.contactService.sendMail(this.text).subscribe(data => {
+      if (data.message == "Email sent") {
+        this.text = "";
+        alert('Mensagem enviada, obrigado.')
+      }
+    }, error => {
+      alert('Houve um probleminha ao enviar a mensagem, você pode tentar novamente ou entre em contato pelo email gardel@gardelsouza.net.')
+    });
   }
-
 }
