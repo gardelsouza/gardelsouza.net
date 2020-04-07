@@ -5,6 +5,7 @@ api/bin/
 api/database*
 api.Test/bin/
 api.Test/obj/
+environments/*
 
 # Ignores do APP
 *~
