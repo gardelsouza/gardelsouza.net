@@ -4,16 +4,6 @@
 
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: "AIzaSyCyBzC_Sbr12D5hlDW4xO15PmNwYsNfVVI",
-    authDomain: "gardelsouza-net.firebaseapp.com",
-    databaseURL: "https://gardelsouza-net.firebaseio.com",
-    projectId: "gardelsouza-net",
-    storageBucket: "gardelsouza-net.appspot.com",
-    messagingSenderId: "762970555209",
-    appId: "1:762970555209:web:e3d45d4a8bf5084eaa9098",
-    measurementId: "G-5YWEWQ9S87"
-  }
 };
 
 /*
