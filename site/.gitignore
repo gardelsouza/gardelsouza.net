@@ -5,11 +5,7 @@ api/bin/
 api/database*
 api.Test/bin/
 api.Test/obj/
-<<<<<<< HEAD
 environments/
-=======
-environments/*
->>>>>>> 5eab26243bd5e80380f46a9c571cd2ab37496b6c
 
 # Ignores do APP
 *~
