@@ -1,1 +1,5 @@
-<p>blog works!</p>
+<div *ngIf="posts">
+    <ul *ngFor="let post of posts">
+        <li>{{ post.published_at | date:'yyyy-MM-dd' }} / <a href="{{ post.url }}" target="_blank">{{ post.title}}</a></li>
+    </ul>
+</div>
