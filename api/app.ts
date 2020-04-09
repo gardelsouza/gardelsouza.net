@@ -3,12 +3,13 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var send = require('sendmail.ts');
+
+import *  as send from './sendmail';
 
 var app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/app'));
+app.use(express.static('./dist/app'));
 
 // Configure body-parser
 app.use(bodyParser.json()); // support json encoded bodies
@@ -17,19 +18,14 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // Enable cors
 app.use(cors());
 
-// Set API key to sendgrid
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 // Routes
 app.post('/sendMail', function (req, res) {
-    if (!req.body.text) {
-        return res.status(400).send({
-            success: 'false',
-            message: 'text is required'
-        });
-    }
-    
-    send.sendMail(req.body.text);
+    var ret = send.sendMail(req.body.text);
+
+    return res.status(ret.code).send({
+        success: ret.success,
+        message: ret.message
+    });
 });
 
 app.get('/*', function (req, res) {

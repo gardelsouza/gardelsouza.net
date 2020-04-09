@@ -10,7 +10,9 @@
     "start": "node server.js",
     "heroku-postbuild": "ng build --prod",
     "deploy": "git push origin master && git push heroku master",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "build_api": "tsc api/*.ts --outDir api/build --module commonjs",
+    "start_api": "tsc api/*.ts --outDir api/build --module commonjs && node api/build/app.js"
   },
   "engines": {
     "node": "v12.16.1",

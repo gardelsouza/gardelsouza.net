@@ -1,6 +1,22 @@
 var sgMail = require('@sendgrid/mail');
 
-function sendMail(text: string) : any {
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+export class ApiReturnType {
+    code: number;
+    success: boolean;
+    message: string;
+}
+
+export function sendMail(text: string): ApiReturnType {
+    if (!text) {
+        return {
+            code: 400,
+            success: false,
+            message: 'text is required'
+        };
+    }
+
     var msg = {
         to: 'gardel@gardelsouza.net',
         from: 'site@gardelsouza.net',
@@ -12,17 +28,16 @@ function sendMail(text: string) : any {
     sgMail.send(msg).then(
         reason => {
             return {
-                success: 'true',
+                code: 201,
+                success: true,
                 message: 'Email sent'
             };
         },
         error => {
             return {
-                success: 'false',
+                code: 401,
+                success: false,
                 message: error.response.body
             };
         });
-
-    return { "" : "" };
 }
-
