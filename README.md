@@ -28,7 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Todo
 
--~~Envio de mensagens por email.~~
--~~Blog usando dev.to.~~
--~~Mostrar ultimos posts do blog na home.~~
--~~Inclusão dos dados do analytics do google.~~
+- ~~Envio de mensagens por email.~~
+- ~~Blog usando dev.to.~~
+- ~~Mostrar ultimos posts do blog na home.~~
+- ~~Inclusão dos dados do analytics do google.~~
