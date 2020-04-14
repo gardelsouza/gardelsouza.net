@@ -1,11 +1,10 @@
-//Install express server
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var cors = require('cors');
-
+import * as express from 'express';
+import * as path  from 'path';
+import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 import *  as send from './sendmail';
 
+//Install express server
 var app = express();
 
 // Serve only the static files form the dist directory
@@ -35,4 +34,4 @@ app.get('/*', function (req, res) {
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
 
-console.log('Running application in port 8080...')
+console.log('Running application on port 8080...')
